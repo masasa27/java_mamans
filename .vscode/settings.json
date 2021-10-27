@@ -1,0 +1,18 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/javaws.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/deploy.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/plugin.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/rt.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/jce.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/jfr.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/jsse.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/management-agent.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/resources.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/charsets.jar",
+        "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/lib/jfxswt.jar"
+    ]
+}
