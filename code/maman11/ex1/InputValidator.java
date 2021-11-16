@@ -3,33 +3,33 @@ package code.maman11.ex1;
 import java.util.Scanner;
 
 public class InputValidator {
-    private String _used_letters;
-    private final Scanner _data_reader;
+    private String usedLetters;
+    private final Scanner dataReader;
 
     public InputValidator() {
-        this._used_letters = "";
-        this._data_reader = new Scanner(System.in);
+        this.usedLetters = "";
+        this.dataReader = new Scanner(System.in);
     }
 
-    public String read_input() {
+    public String readInput() {
         System.out.println("enter character");
-        String input = this._data_reader.nextLine();
-        while (!validate_input(input)) {
+        String input = this.dataReader.nextLine();
+        while (!validateInput(input)) {
             System.out.println("you have entered an invalid input, please try again");
-            input = this._data_reader.nextLine();
+            input = this.dataReader.nextLine();
         }
         return input;
     }
 
-    public Boolean validate_input(String c) {
+    public Boolean validateInput(String c) {
         if (c.length() > 1) {
             return false;
         }
 
-        if (this._used_letters.contains(c)) {
+        if (this.usedLetters.contains(c)) {
             return false;
         }
-        this._used_letters += c;
+        this.usedLetters += c;
         return true;
     }
 }

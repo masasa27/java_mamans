@@ -13,7 +13,7 @@ public class WordsDb {
         superHeroes[3] = new Word("flash");
     }
 
-    public Word generate_word()
+    public Word generateWord()
     {
         // This function returns a random word out of the string DB
 

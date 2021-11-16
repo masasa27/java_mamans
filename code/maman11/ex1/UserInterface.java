@@ -8,25 +8,25 @@ public class UserInterface {
     private GameBored game_bored;
 
     public UserInterface() {
-        this.restart_variables();
+        this.restartVariables();
     }
 
-    private void restart_variables() {
+    private void restartVariables() {
         WordsDb words_db = new WordsDb();
-        Word chosen_word = words_db.generate_word();
+        Word chosen_word = words_db.generateWord();
         this.input_validator = new InputValidator();
         this.game_bored = new GameBored(chosen_word);
     }
 
-    public void play_turn() {
+    public void playTurn() {
         game_bored.printWord();
-        String input = input_validator.read_input();
+        String input = input_validator.readInput();
         game_bored.playTurn(input);
     }
 
-    public boolean play_game() {
+    public boolean playGame() {
         while (!game_bored.done()) {
-            this.play_turn();
+            this.playTurn();
         }
         System.out.println("You Won!");
         this.restart();
@@ -38,8 +38,8 @@ public class UserInterface {
         System.out.println("if you want to restart please write 1, any other key will exit");
         String restart_string = restart.nextLine();
         if (restart_string.equals("1")) {
-            this.restart_variables();
-            this.play_game();
+            this.restartVariables();
+            this.playGame();
         }
         restart.close();
     }

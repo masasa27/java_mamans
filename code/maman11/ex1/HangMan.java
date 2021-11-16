@@ -4,7 +4,7 @@ public static void main(String[] args) {
 
     UserInterface userInterface = new UserInterface();
 
-    userInterface.play_game();
+    userInterface.playGame();
 
     }
 }
