@@ -27,8 +27,8 @@ public class GameOfLifeController {
         // connects to canvas and clears it
         if (!this.anyColor())
         {
-            // this.randomizeMatrix();
-            this.lineCheck();
+            this.randomizeMatrix();
+            // this.lineCheck();
             this.colorByMatrix();
         }
 
