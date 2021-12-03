@@ -1,13 +1,12 @@
 package code.maman12.ex1;
 
-
-public class HourlyEmployee extends Employee {
+public class HourlyEmployee extends ConcreteEmployee {
     private double wage;
     private double hours;
 
     public HourlyEmployee(String firstName, String lastName, String socialSecurityNumber,
-                          double wage, double hours) {
-        super(firstName, lastName, socialSecurityNumber);
+            double wage, double hours, Birthday birthday) {
+        super(firstName, lastName, socialSecurityNumber, birthday);
 
         if (wage < 0) {
             throw new IllegalArgumentException("Hourly wage must be >= 0");
@@ -47,11 +46,10 @@ public class HourlyEmployee extends Employee {
 
     @Override
     public double earnings() {
-        if (getHours() <= 40){
-            return getWage() * getHours();
-        }
-        else {
-            return 40 * getWage() + (getHours() - 40) * getWage() * 1.5;
+        if (getHours() <= 40) {
+            return getWage() * getHours() + super.earnings();
+        } else {
+            return 40 * getWage() + (getHours() - 40) * getWage() * 1.5 + super.earnings();
         }
     }
 

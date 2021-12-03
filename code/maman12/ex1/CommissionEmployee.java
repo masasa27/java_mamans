@@ -1,12 +1,12 @@
 package code.maman12.ex1;
 
-public class CommissionEmployee extends Employee {
+public class CommissionEmployee extends ConcreteEmployee {
     private double grossSales;
     private double commissionRate;
 
     public CommissionEmployee(String firstName, String lastName, String socialSecurityNumber,
-            double grossSales, double commissionRate) {
-        super(firstName, lastName, socialSecurityNumber);
+            double grossSales, double commissionRate, Birthday birthday) {
+        super(firstName, lastName, socialSecurityNumber, birthday);
 
         if (commissionRate <= 0 || commissionRate >= 1) {
             throw new IllegalArgumentException("Commission rate must be > 0 and < 1");
@@ -46,7 +46,7 @@ public class CommissionEmployee extends Employee {
 
     @Override
     public double earnings() {
-        return getCommissionRate() * getGrossSales();
+        return getCommissionRate() * getGrossSales() + super.earnings();
     }
 
     @Override
