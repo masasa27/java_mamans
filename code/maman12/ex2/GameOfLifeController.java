@@ -10,10 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class GameOfLifeController {
+    int Y_BOUND = 3;
+    int X_BOUND = 3; 
     private Random randomizer = new Random();
-    private int matrix[][] = new int[10][10];
-    int Y_BOUND = 10;
-    int X_BOUND = 10; 
+    private int matrix[][] = new int[X_BOUND][Y_BOUND];
 
     @FXML
     private Button button;
@@ -28,6 +28,7 @@ public class GameOfLifeController {
         if (!this.anyColor())
         {
             this.randomizeMatrix();
+            this.colorByMatrix();
         }
 
         else
@@ -55,11 +56,11 @@ public class GameOfLifeController {
 
         // vertical lines
         gc.setStroke(Color.BLUE);
-        int x_jump_value = (int) canvas.getWidth() / 10;
-        int y_jump_value = (int) canvas.getHeight() / 10;
+        int x_jump_value = (int) canvas.getWidth() / X_BOUND;
+        int y_jump_value = (int) canvas.getHeight() / Y_BOUND;
 
         for (int i = 0; i < canvas.getWidth(); i += x_jump_value) {
-            gc.strokeLine(i, 0, i, canvas.getHeight() - (canvas.getHeight() % 10));
+            gc.strokeLine(i, 0, i, canvas.getHeight() - (canvas.getHeight() % Y_BOUND));
         }
 
         // horizontal lines
@@ -87,11 +88,11 @@ public class GameOfLifeController {
     public void colorByMatrix() {
         createGrid();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        int x_jump_value = (int) canvas.getWidth() / 10;
-        int y_jump_value = (int) canvas.getHeight() / 10;
+        int x_jump_value = (int) canvas.getWidth() / X_BOUND;
+        int y_jump_value = (int) canvas.getHeight() / Y_BOUND;
         int x, y;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < X_BOUND; i++) {
+            for (int j = 0; j < Y_BOUND; j++) {
                 if (matrix[i][j] == 1) {
                     x = i * x_jump_value;
                     y = j * y_jump_value;
@@ -104,7 +105,7 @@ public class GameOfLifeController {
 
     public void calculateMatrix()
     {
-        int [][] tempMatrix = new int [10][10];
+        int [][] tempMatrix = new int [X_BOUND][Y_BOUND];
         // calculating the new matrix
         for (int i = 0; i < X_BOUND; i++) {
             for (int j = 0; j < Y_BOUND; j++) {
@@ -123,10 +124,16 @@ public class GameOfLifeController {
     public int calculateCube(int x, int y){
         int neighbors;
         neighbors = getNeighborsCount(x, y);
+        if (neighbors == 3)
+        {
+            return 1;
+        }
+        
         if (neighbors <= 1)
         {
             return 0;
         }
+
         if ((neighbors >= 2) && (neighbors <= 3))
         {
             return matrix[x][y];
@@ -167,7 +174,6 @@ public class GameOfLifeController {
         {
             n += matrix[x + 1][y + 1];
         }
-
         if ((x + 1 < X_BOUND) && (y - 1 >= 0))
         {
             n+= matrix[x + 1][y - 1];
