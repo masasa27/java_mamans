@@ -104,10 +104,34 @@ public class GameOfLifeController {
 
     public void calculateMatrix()
     {
+        int [][] tempMatrix = new int [10][10];
+        // calculating the new matrix
+        for (int i = 0; i < X_BOUND; i++) {
+            for (int j = 0; j < Y_BOUND; j++) {
+                tempMatrix[i][j] = calculateCube(i , j);
+            }
+        }
 
+        // copy old matrix into new matrix
+        for (int i = 0; i < X_BOUND; i++) {
+            for (int j = 0; j < Y_BOUND; j++) {
+                matrix[i][j] = tempMatrix[i][j];
+            }
+        }
     }
 
-    public void calculateCube(){
+    public int calculateCube(int x, int y){
+        int neighbors;
+        neighbors = getNeighborsCount(x, y);
+        if (neighbors <= 1)
+        {
+            return 0;
+        }
+        if ((neighbors >= 2) && (neighbors <= 3))
+        {
+            return matrix[x][y];
+        }
+        return 0;
 
     }
 
