@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 public class GameOfLifeController {
     private Random randomizer = new Random();
     private int matrix[][] = new int[10][10];
+    int Y_BOUND = 10;
+    int X_BOUND = 10; 
 
     @FXML
     private Button button;
@@ -37,8 +39,8 @@ public class GameOfLifeController {
     }
 
     public void initialize() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < X_BOUND; i++) {
+            for (int j = 0; j < Y_BOUND; j++) {
                 matrix[i][j] = 0;
             }
         }
@@ -68,8 +70,8 @@ public class GameOfLifeController {
     }
 
     public Boolean anyColor() {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < X_BOUND; i++) {
+            for (int j = 0; j < Y_BOUND; j++) {
                 if (matrix[i][j] == 1) {
                     return true;
                 }
@@ -112,5 +114,46 @@ public class GameOfLifeController {
     private void randomizeMatrix()
     {
 
+    }
+
+    public int getNeighborsCount(int x, int y){
+        int n = 0;
+        if (x - 1 >= 0){
+            n += matrix[x - 1][y];
+        }
+
+        if (x + 1 < X_BOUND)
+        {
+            n +=  matrix[x + 1][y];
+        }
+
+        if (y - 1 >= 0){
+            n += matrix[x][y - 1];
+        }
+
+        if (y + 1 < Y_BOUND){
+            n += matrix[x][y + 1];
+        }
+
+        if ((x + 1 < X_BOUND) && (y + 1 < Y_BOUND))
+        {
+            n += matrix[x + 1][y + 1];
+        }
+
+        if ((x + 1 < X_BOUND) && (y - 1 >= 0))
+        {
+            n+= matrix[x + 1][y - 1];
+        }
+        if ((x - 1 >= 0) && (y + 1 < Y_BOUND))
+        {
+            n+= matrix[x - 1][y + 1];
+        }
+        if ((x - 1 >= 0) && (y - 1 >= 0))
+        {
+            n += matrix[x - 1][y - 1];
+        }
+
+
+        return n;
     }
 }
