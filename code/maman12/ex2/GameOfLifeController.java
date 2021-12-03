@@ -137,7 +137,11 @@ public class GameOfLifeController {
 
     private void randomizeMatrix()
     {
-
+        for (int i = 0; i < X_BOUND; i++) {
+            for (int j = 0; j < Y_BOUND; j++) {
+                matrix[i][j] = Math.round((float)Math.random());
+            }
+        }
     }
 
     public int getNeighborsCount(int x, int y){
