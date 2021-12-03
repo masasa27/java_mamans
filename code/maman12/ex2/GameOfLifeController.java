@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class GameOfLifeController {
-    int Y_BOUND = 3;
-    int X_BOUND = 3; 
+    int Y_BOUND = 10;
+    int X_BOUND = 10; 
     private Random randomizer = new Random();
     private int matrix[][] = new int[X_BOUND][Y_BOUND];
 
@@ -27,7 +27,8 @@ public class GameOfLifeController {
         // connects to canvas and clears it
         if (!this.anyColor())
         {
-            this.randomizeMatrix();
+            // this.randomizeMatrix();
+            this.lineCheck();
             this.colorByMatrix();
         }
 
@@ -85,9 +86,17 @@ public class GameOfLifeController {
         this.matrix[x][y] = color;
     }
 
+    public void lineCheck()
+    {
+        matrix[1][1] = 1;
+        matrix[2][1] = 1;
+        matrix[3][1] = 1;
+    }
+
     public void colorByMatrix() {
         createGrid();
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
         int x_jump_value = (int) canvas.getWidth() / X_BOUND;
         int y_jump_value = (int) canvas.getHeight() / Y_BOUND;
         int x, y;
@@ -96,7 +105,7 @@ public class GameOfLifeController {
                 if (matrix[i][j] == 1) {
                     x = i * x_jump_value;
                     y = j * y_jump_value;
-                    gc.fillRect(x, y, y + x_jump_value, x + y_jump_value);
+                    gc.fillRect(x, y, x_jump_value, y_jump_value);
                 }
             }
         }
