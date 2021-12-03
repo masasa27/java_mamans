@@ -1,7 +1,7 @@
 package code.maman12.ex1;
 
 
-public class SalariedEmployee extends Employee {
+public class SalariedEmployee extends ConcreteEmployee {
     private double weeklySalary;
 
     public SalariedEmployee(String firstName, String lastName,
@@ -29,7 +29,7 @@ public class SalariedEmployee extends Employee {
 
     @Override
     public double earnings() {
-        return getWeeklySalary();
+        return getWeeklySalary() + super.earnings();
     }
 
     @Override
