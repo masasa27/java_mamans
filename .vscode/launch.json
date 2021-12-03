@@ -4,6 +4,21 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+    
+        {
+            "type": "java",
+            "name": "Launch ActionShapeGenerator",
+            "request": "launch",
+            "mainClass": "code.maman11.ex2.ActionShapeGenerator",
+            "projectName": "java_mamans_fa62644a"
+        },
+        {
+            "type": "java",
+            "name": "Launch GameOfLife",
+            "request": "launch",
+            "mainClass": "code.maman12.ex2.GameOfLife",
+            "projectName": "java_mamans_fa62644a"
+        },
         {
             "type": "java",
             "name": "Launch PayrollSystemTest",
