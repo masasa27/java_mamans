@@ -43,7 +43,7 @@ public class GameOfLifeController {
     
      
     }
-    
+    public void initialize()
     {
            // connects to canvas and clears it
            GraphicsContext gc = canvas.getGraphicsContext2D();
