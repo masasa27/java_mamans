@@ -1,6 +1,5 @@
 package code.maman12.ex2;
 
-import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.paint.Color;
 public class GameOfLifeController {
     int Y_BOUND = 10;
     int X_BOUND = 10; 
-    private Random randomizer = new Random();
     private int matrix[][] = new int[X_BOUND][Y_BOUND];
 
     @FXML
@@ -23,24 +21,22 @@ public class GameOfLifeController {
 
     @FXML
     void nextGen(ActionEvent event) {
-
-        // connects to canvas and clears it
-        if (!this.anyColor())
+        // shows the next generation
+        if (!this.isNotEmptyGrid())
         {
             this.randomizeMatrix();
-            // this.lineCheck();
-            this.colorByMatrix();
         }
-
         else
         {
             this.calculateMatrix();
-            this.colorByMatrix();
         }
+        this.colorByMatrix();
 
     }
 
-    public void initialize() {
+    public void initialize() 
+    {
+        //initlize the matrix and the grid
         for (int i = 0; i < X_BOUND; i++) {
             for (int j = 0; j < Y_BOUND; j++) {
                 matrix[i][j] = 0;
@@ -50,6 +46,8 @@ public class GameOfLifeController {
     }
 
     private void createGrid() {
+        // creates a line grid
+
         // connects to canvas and clears it
         GraphicsContext gc = canvas.getGraphicsContext2D();
         // GraphicsContext gc = canvas.getGraphicsContext2D()/
@@ -71,7 +69,9 @@ public class GameOfLifeController {
         }
     }
 
-    public Boolean anyColor() {
+    public Boolean isNotEmptyGrid() 
+    {
+        // returns True if grid is not empty, false otherwise
         for (int i = 0; i < X_BOUND; i++) {
             for (int j = 0; j < Y_BOUND; j++) {
                 if (matrix[i][j] == 1) {
@@ -82,18 +82,8 @@ public class GameOfLifeController {
         return false;
     }
 
-    public void colorCubeIndex(int x, int y, int color) {
-        this.matrix[x][y] = color;
-    }
-
-    public void lineCheck()
-    {
-        matrix[1][1] = 1;
-        matrix[2][1] = 1;
-        matrix[3][1] = 1;
-    }
-
-    public void colorByMatrix() {
+    private void colorByMatrix() {
+        // color the grid based on the location matrix
         createGrid();
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -105,6 +95,8 @@ public class GameOfLifeController {
                 if (matrix[i][j] == 1) {
                     x = i * x_jump_value;
                     y = j * y_jump_value;
+
+                    // color the rectangle
                     gc.fillRect(x, y, x_jump_value, y_jump_value);
                 }
             }
@@ -112,8 +104,10 @@ public class GameOfLifeController {
 
     }
 
-    public void calculateMatrix()
+    private void calculateMatrix()
     {
+        // Calculate the next generation of the game
+
         int [][] tempMatrix = new int [X_BOUND][Y_BOUND];
         // calculating the new matrix
         for (int i = 0; i < X_BOUND; i++) {
@@ -130,7 +124,9 @@ public class GameOfLifeController {
         }
     }
 
-    public int calculateCube(int x, int y){
+    private int calculateCube(int x, int y){
+        // calculate the next generation of a rectangle
+
         int neighbors;
         neighbors = getNeighborsCount(x, y);
         if (neighbors == 3)
@@ -152,6 +148,8 @@ public class GameOfLifeController {
     }
 
     private void randomizeMatrix()
+    // creates a random starting point 
+
     {
         for (int i = 0; i < X_BOUND; i++) {
             for (int j = 0; j < Y_BOUND; j++) {
@@ -160,7 +158,8 @@ public class GameOfLifeController {
         }
     }
 
-    public int getNeighborsCount(int x, int y){
+    private int getNeighborsCount(int x, int y){
+        // returns the numbers of living neighbors
         int n = 0;
         if (x - 1 >= 0){
             n += matrix[x - 1][y];
