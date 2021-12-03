@@ -14,4 +14,17 @@ public class PieceWorker extends ConcreteEmployee {
         return this.itemCount * this.itemCost + super.earnings();
     }
     
+    public double getItemCount(){
+        return this.itemCount;
+    }
+
+    public double getItemCost(){
+        return this.itemCost;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("PieceMaker employee: %s%n%s : $%.2f; %s: %,.2f",
+                super.toString(), "ItemCost", getItemCost(), "item count", getItemCount(), earnings());
+    }
 }
