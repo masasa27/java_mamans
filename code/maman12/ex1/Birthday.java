@@ -9,12 +9,11 @@ public class Birthday {
 
     public Birthday(int day, int month, int year) {
         this.day = day;
-        this.month = month;
-        this.year = year;
+        this.month = month;        this.year = year;
     }
 
     public Boolean isBirthdayMonth() {
-        return (this.month == this.today.get(Calendar.MONTH));
+        return (this.month == this.today.get(Calendar.MONTH) + 1);
     }
 
     public String toString() {
