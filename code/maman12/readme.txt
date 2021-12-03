@@ -12,11 +12,11 @@ the rest as described
 
 ex2 -> run GameOfLife.java
 --------------------------------
-if you wish to have a larger sacle from 10*10, change X_BOUND and Y_BOUND 
+if you wish to have a larger scale from 10*10, change X_BOUND and Y_BOUND 
 respectively, in GameOfLifeController.java.
 --------------------------------
 
-i didnt move the game into a different class since its still all realated
+i didn't move the game into a different class since its still all related
 on a larger scale game i would have
 
 thanks!
