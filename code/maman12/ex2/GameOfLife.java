@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class GameOfLife extends Application {
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(Stage stage)
 		Parent root=FXMLLoader.load(getClass().getResource("ConwayGameOfLive.fxml"));
 		Scene scene=new Scene(root);
 		stage.setTitle("Random Shapes Generator");

@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 public class GameOfLifeController {
     private Random randomizer = new Random();
     private final int regions = 5;
+
     @FXML
     private Button button;
 
@@ -23,8 +24,44 @@ public class GameOfLifeController {
 
         // connects to canvas and clears it
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        // GraphicsContext gc = canvas.getGraphicsContext2D()/
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-      
+        // vertical lines
+        gc.setStroke(Color.BLUE);
+        int x_jump_value = (int)canvas.getWidth() / 10;
+        int y_jump_value = (int)canvas.getHeight() / 10;
+        for(int i = 0 ; i < canvas.getWidth() ; i +=x_jump_value){
+            gc.strokeLine(i, 0, i, canvas.getHeight() - (canvas.getHeight()%10));
+        }        
+
+        // horizontal lines
+        gc.setStroke(Color.RED);
+        for(int i = 0 ; i < canvas.getHeight() ; i+=y_jump_value){
+            gc.strokeLine(10, i, canvas.getWidth(), i);
+        } 
+    
+     
+    }
+    
+    {
+           // connects to canvas and clears it
+           GraphicsContext gc = canvas.getGraphicsContext2D();
+           // GraphicsContext gc = canvas.getGraphicsContext2D()/
+           gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+   
+           // vertical lines
+           gc.setStroke(Color.BLUE);
+           int x_jump_value = (int)canvas.getWidth() / 10;
+           int y_jump_value = (int)canvas.getHeight() / 10;
+           for(int i = 0 ; i < canvas.getWidth() ; i +=x_jump_value){
+               gc.strokeLine(i, 0, i, canvas.getHeight() - (canvas.getHeight()%10));
+           }        
+   
+           // horizontal lines
+           gc.setStroke(Color.RED);
+           for(int i = 0 ; i < canvas.getHeight() ; i+=y_jump_value){
+               gc.strokeLine(10, i, canvas.getWidth(), i);
+           } 
     }
 }
