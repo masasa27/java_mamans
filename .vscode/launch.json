@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch PayrollSystemTest",
+            "request": "launch",
+            "mainClass": "code.maman12.ex1.PayrollSystemTest",
+            "projectName": "java_mamans_fa62644a"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

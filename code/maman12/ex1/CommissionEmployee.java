@@ -1,12 +1,11 @@
 package code.maman12.ex1;
 
-
 public class CommissionEmployee extends Employee {
     private double grossSales;
     private double commissionRate;
 
     public CommissionEmployee(String firstName, String lastName, String socialSecurityNumber,
-                              double grossSales, double commissionRate) {
+            double grossSales, double commissionRate) {
         super(firstName, lastName, socialSecurityNumber);
 
         if (commissionRate <= 0 || commissionRate >= 1) {
