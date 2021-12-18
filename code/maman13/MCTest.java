@@ -79,13 +79,38 @@ public class MCTest extends Application {
             radio4.setOnAction(e -> button.setDisable(false));
 
             button.setOnAction(e -> {
-
-                if (radio3.isSelected()) {
+                if ((radio1.isSelected()) && (this.checkCorrectAnswer(radio1.getText(), q.answer)))
+                {
                     labelResponse.setText("Correct answer");
                     button.setDisable(false);
                     this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
                             labelResponse, primaryStage);
                 }
+
+                else if ((radio2.isSelected()) && (this.checkCorrectAnswer(radio2.getText(), q.answer)))
+                {
+                    labelResponse.setText("Correct answer");
+                    button.setDisable(false);
+                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                            labelResponse, primaryStage);
+                }
+
+                else if ((radio3.isSelected()) && (this.checkCorrectAnswer(radio3.getText(), q.answer)))
+                {
+                    labelResponse.setText("Correct answer");
+                    button.setDisable(false);
+                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                            labelResponse, primaryStage);
+                }
+
+                else if ((radio4.isSelected()) && (this.checkCorrectAnswer(radio4.getText(), q.answer)))
+                {
+                    labelResponse.setText("Correct answer");
+                    button.setDisable(false);
+                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                            labelResponse, primaryStage);
+                }
+
 
                 else {
                     labelResponse.setText("Wrong answer");
@@ -94,6 +119,7 @@ public class MCTest extends Application {
             });
         } else {
             labelResponse.setText("Youve made it!");
+            primaryStage.close();
         }
 
     }
@@ -107,6 +133,14 @@ public class MCTest extends Application {
             ar[index] = ar[i];
             ar[i] = a;
         }
+    }
+
+    public boolean checkCorrectAnswer(String answer, Answer[] ar) {
+        for (int i = 0; i < ar.length; i++) {
+            if ((ar[i].answer == answer) && (ar[i].correct))
+                return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) throws IOException {
