@@ -9,33 +9,68 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.List;
+import java.io.IOException;
 
 public class MCTest extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
+        int rowIndex = 0;
 
-        primaryStage.setTitle("Test Question 1");
+        FileReader reader = new FileReader("questions.txt");
+        List<Question> questions = reader.getQuestions();
 
-        Label labelfirst = new Label("What is 10 + 20?");
-        Label labelresponse = new Label();
+        Question q = questions.get(rowIndex);
+        Label labelFirst = new Label(q.question);
+        Label labelResponse = new Label();
 
         Button button = new Button("Submit");
-
         RadioButton radio1, radio2, radio3, radio4;
-        radio1 = new RadioButton("10");
-        radio2 = new RadioButton("20");
-        radio3 = new RadioButton("30");
-        radio4 = new RadioButton("40");
+        radio1 = new RadioButton();
+        radio2 = new RadioButton();
+        radio3 = new RadioButton();
+        radio4 = new RadioButton();
 
-        ToggleGroup question1 = new ToggleGroup();
+        VBox layout = new VBox(5);
 
-        radio1.setToggleGroup(question1);
-        radio2.setToggleGroup(question1);
-        radio3.setToggleGroup(question1);
-        radio4.setToggleGroup(question1);
+        layout.getChildren().addAll(labelFirst, radio1, radio2, radio3, radio4, button, labelResponse);
 
-        button.setDisable(true);
+        Scene scene1 = new Scene(layout, 400, 250);
+        primaryStage.setScene(scene1);
+
+        primaryStage.show();
+
+        this.changeQuestion(questions, rowIndex, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse, primaryStage);
+
+    }
+
+    public void changeQuestion(List<Question> questions, int rowIndex, RadioButton radio1, RadioButton radio2,
+            RadioButton radio3, RadioButton radio4, Label labelFirst, Button button, Label labelResponse, Stage primaryStage) {
+        
+        if (rowIndex < questions.size()) {
+
+        
+        String title = String.format("Test Question %d", rowIndex);
+        primaryStage.setTitle(title);
+
+        Question q = questions.get(rowIndex);
+        // randomize order
+        Collections.shuffle(q.answer);
+
+        radio1.setText(q.answer[0].answer);
+        radio2.setText(q.answer[1].answer);
+        radio3.setText(q.answer[2].answer);
+        radio4.setText(q.answer[3].answer);
+        labelFirst.setText(q.question);
+
+        ToggleGroup question = new ToggleGroup();
+
+        radio1.setToggleGroup(question);
+        radio2.setToggleGroup(question);
+        radio3.setToggleGroup(question);
+        radio4.setToggleGroup(question);
+
 
         radio1.setOnAction(e -> button.setDisable(false));
         radio2.setOnAction(e -> button.setDisable(false));
@@ -45,27 +80,24 @@ public class MCTest extends Application {
         button.setOnAction(e -> {
 
             if (radio3.isSelected()) {
-                labelresponse.setText("Correct answer");
-                button.setDisable(true);
+                labelResponse.setText("Correct answer");
+                button.setDisable(false);
+                this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse, primaryStage);
             }
 
             else {
-                labelresponse.setText("Wrong answer");
+                labelResponse.setText("Wrong answer");
                 button.setDisable(true);
             }
         });
-
-        VBox layout = new VBox(5);
-
-        layout.getChildren().addAll(labelfirst, radio1, radio2, radio3, radio4, button, labelresponse);
-
-        Scene scene1 = new Scene(layout, 400, 250);
-        primaryStage.setScene(scene1);
-
-        primaryStage.show();
+    }
+    else{
+        labelResponse.setText("Youve made it!");
     }
 
-    public static void main(String[] args) {
+    }
+
+    public static void main(String[] args) throws IOException {
         launch(args);
     }
 

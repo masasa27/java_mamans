@@ -4,7 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
+        {
+            "type": "java",
+            "name": "Launch MCTest",
+            "request": "launch",
+            "mainClass": "code.maman13.MCTest",
+            "projectName": "java_mamans_fa62644a"
+        },
         {
             "type": "java",
             "name": "Launch ActionShapeGenerator",
