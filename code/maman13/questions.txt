@@ -3,3 +3,8 @@ Jerusalem
 Tel Aviv
 Hafia
 Ashdod
+which name is the longest?
+Dorel
+Dana
+Yam
+Lior
