@@ -1,4 +1,4 @@
-package code.maman13;
+package code.maman13.ex1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,12 +13,13 @@ public class FileReader {
 
     public FileReader(String filename) throws IOException {
         // getting file path
-        String path = new File("./code/maman13").getAbsolutePath();
+        String path = new File("./code/maman13/ex1").getAbsolutePath();
         File absPathFile = new File(path, filename);
         this.absFilePath = absPathFile.getPath();
     }
 
     public List<Question> getQuestions() {
+        // creates a list of questions from a file
         int rowIndex = 0;
         try {
 

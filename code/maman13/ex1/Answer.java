@@ -1,4 +1,4 @@
-package code.maman13;
+package code.maman13.ex1;
 
 public class Answer {
     String answer;

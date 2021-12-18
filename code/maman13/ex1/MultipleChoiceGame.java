@@ -1,4 +1,4 @@
-package code.maman13;
+package code.maman13.ex1;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.*;
 
-public class MCTest extends Application {
+public class MultipleChoiceGame extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -42,17 +42,21 @@ public class MCTest extends Application {
 
         primaryStage.show();
 
-        this.changeQuestion(questions, rowIndex, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse,
+        this.runQuestions(questions, rowIndex, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse,
                 primaryStage);
 
     }
 
-    public void changeQuestion(List<Question> questions, int rowIndex, RadioButton radio1, RadioButton radio2,
+    public void runQuestions(List<Question> questions, int rowIndex, RadioButton radio1, RadioButton radio2,
             RadioButton radio3, RadioButton radio4, Label labelFirst, Button button, Label labelResponse,
             Stage primaryStage) {
+        /// this functions displays a question, and if user choose answer correctly,
+        /// displays the next question
 
+        // this questions remains
         if (rowIndex < questions.size()) {
 
+            // displaying the question
             String title = String.format("Test Question %d", rowIndex);
             primaryStage.setTitle(title);
 
@@ -78,45 +82,42 @@ public class MCTest extends Application {
             radio3.setOnAction(e -> button.setDisable(false));
             radio4.setOnAction(e -> button.setDisable(false));
 
+            // answer test
             button.setOnAction(e -> {
-                if ((radio1.isSelected()) && (this.checkCorrectAnswer(radio1.getText(), q.answer)))
-                {
+                if ((radio1.isSelected()) && (this.checkCorrectAnswer(radio1.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
                     button.setDisable(false);
-                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
                             labelResponse, primaryStage);
                 }
 
-                else if ((radio2.isSelected()) && (this.checkCorrectAnswer(radio2.getText(), q.answer)))
-                {
+                else if ((radio2.isSelected()) && (this.checkCorrectAnswer(radio2.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
                     button.setDisable(false);
-                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
                             labelResponse, primaryStage);
                 }
 
-                else if ((radio3.isSelected()) && (this.checkCorrectAnswer(radio3.getText(), q.answer)))
-                {
+                else if ((radio3.isSelected()) && (this.checkCorrectAnswer(radio3.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
                     button.setDisable(false);
-                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
                             labelResponse, primaryStage);
                 }
 
-                else if ((radio4.isSelected()) && (this.checkCorrectAnswer(radio4.getText(), q.answer)))
-                {
+                else if ((radio4.isSelected()) && (this.checkCorrectAnswer(radio4.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
                     button.setDisable(false);
-                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
                             labelResponse, primaryStage);
                 }
-
 
                 else {
                     labelResponse.setText("Wrong answer");
                     button.setDisable(true);
                 }
             });
+        // finished all!
         } else {
             labelResponse.setText("Youve made it!");
             primaryStage.close();
@@ -126,9 +127,10 @@ public class MCTest extends Application {
 
     public void shuffleArray(Answer[] ar) {
         Random random = new Random();
+        // shuffling a giving array
+
         for (int i = ar.length - 1; i > 0; i--) {
             int index = random.nextInt(i + 1);
-            // Simple swap
             Answer a = ar[index];
             ar[index] = ar[i];
             ar[i] = a;
@@ -136,6 +138,7 @@ public class MCTest extends Application {
     }
 
     public boolean checkCorrectAnswer(String answer, Answer[] ar) {
+    // checking if answer is corrected 
         for (int i = 0; i < ar.length; i++) {
             if ((ar[i].answer == answer) && (ar[i].correct))
                 return true;
