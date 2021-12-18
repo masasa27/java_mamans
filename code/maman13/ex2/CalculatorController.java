@@ -94,20 +94,20 @@ public class CalculatorController {
             // operation choosing
         } else if (event.getSource() == plus) {
             firstValue = Float.parseFloat(display.getText());
-            operation = 1; // Addition
+            operation = 1;
             display.setText("");
-            
+
         } else if (event.getSource() == minus) {
             firstValue = Float.parseFloat(display.getText());
-            operation = 2; // Substraction
+            operation = 2;
             display.setText("");
         } else if (event.getSource() == mult) {
             firstValue = Float.parseFloat(display.getText());
-            operation = 3; // Mul
+            operation = 3;
             display.setText("");
         } else if (event.getSource() == div) {
             firstValue = Float.parseFloat(display.getText());
-            operation = 4; // Division
+            operation = 4;
             display.setText("");
 
         } else if (event.getSource() == equals) {
@@ -121,19 +121,25 @@ public class CalculatorController {
         // perform operation
         Float secondValue = Float.parseFloat(display.getText());
         switch (operation) {
-            case 1: // Addition
+            // Addition
+            case 1:
                 Float ans = firstValue + secondValue;
                 display.setText(String.valueOf(ans));
                 break;
-            case 2: // Subtraction
+
+            // Subtraction
+            case 2:
                 ans = firstValue - secondValue;
                 display.setText(String.valueOf(ans));
                 break;
-            case 3: // Mul
+            // Multiply
+            case 3:
                 ans = firstValue * secondValue;
                 display.setText(String.valueOf(ans));
                 break;
-            case 4: // Div
+
+            // Division
+            case 4:
                 ans = 0f;
                 try {
                     ans = firstValue / secondValue;
