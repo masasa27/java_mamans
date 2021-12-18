@@ -1,5 +1,6 @@
 package code.maman13;
 
+import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
@@ -10,7 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.List;
-import java.io.IOException;
+import java.util.*;
 
 public class MCTest extends Application {
 
@@ -41,60 +42,71 @@ public class MCTest extends Application {
 
         primaryStage.show();
 
-        this.changeQuestion(questions, rowIndex, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse, primaryStage);
+        this.changeQuestion(questions, rowIndex, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse,
+                primaryStage);
 
     }
 
     public void changeQuestion(List<Question> questions, int rowIndex, RadioButton radio1, RadioButton radio2,
-            RadioButton radio3, RadioButton radio4, Label labelFirst, Button button, Label labelResponse, Stage primaryStage) {
-        
+            RadioButton radio3, RadioButton radio4, Label labelFirst, Button button, Label labelResponse,
+            Stage primaryStage) {
+
         if (rowIndex < questions.size()) {
 
-        
-        String title = String.format("Test Question %d", rowIndex);
-        primaryStage.setTitle(title);
+            String title = String.format("Test Question %d", rowIndex);
+            primaryStage.setTitle(title);
 
-        Question q = questions.get(rowIndex);
-        // randomize order
-        Collections.shuffle(q.answer);
+            Question q = questions.get(rowIndex);
+            // randomize order
+            this.shuffleArray(q.answer);
 
-        radio1.setText(q.answer[0].answer);
-        radio2.setText(q.answer[1].answer);
-        radio3.setText(q.answer[2].answer);
-        radio4.setText(q.answer[3].answer);
-        labelFirst.setText(q.question);
+            radio1.setText(q.answer[0].answer);
+            radio2.setText(q.answer[1].answer);
+            radio3.setText(q.answer[2].answer);
+            radio4.setText(q.answer[3].answer);
+            labelFirst.setText(q.question);
 
-        ToggleGroup question = new ToggleGroup();
+            ToggleGroup question = new ToggleGroup();
 
-        radio1.setToggleGroup(question);
-        radio2.setToggleGroup(question);
-        radio3.setToggleGroup(question);
-        radio4.setToggleGroup(question);
+            radio1.setToggleGroup(question);
+            radio2.setToggleGroup(question);
+            radio3.setToggleGroup(question);
+            radio4.setToggleGroup(question);
 
+            radio1.setOnAction(e -> button.setDisable(false));
+            radio2.setOnAction(e -> button.setDisable(false));
+            radio3.setOnAction(e -> button.setDisable(false));
+            radio4.setOnAction(e -> button.setDisable(false));
 
-        radio1.setOnAction(e -> button.setDisable(false));
-        radio2.setOnAction(e -> button.setDisable(false));
-        radio3.setOnAction(e -> button.setDisable(false));
-        radio4.setOnAction(e -> button.setDisable(false));
+            button.setOnAction(e -> {
 
-        button.setOnAction(e -> {
+                if (radio3.isSelected()) {
+                    labelResponse.setText("Correct answer");
+                    button.setDisable(false);
+                    this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                            labelResponse, primaryStage);
+                }
 
-            if (radio3.isSelected()) {
-                labelResponse.setText("Correct answer");
-                button.setDisable(false);
-                this.changeQuestion(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse, primaryStage);
-            }
+                else {
+                    labelResponse.setText("Wrong answer");
+                    button.setDisable(true);
+                }
+            });
+        } else {
+            labelResponse.setText("Youve made it!");
+        }
 
-            else {
-                labelResponse.setText("Wrong answer");
-                button.setDisable(true);
-            }
-        });
     }
-    else{
-        labelResponse.setText("Youve made it!");
-    }
 
+    public void shuffleArray(Answer[] ar) {
+        Random random = new Random();
+        for (int i = ar.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            // Simple swap
+            Answer a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 
     public static void main(String[] args) throws IOException {
