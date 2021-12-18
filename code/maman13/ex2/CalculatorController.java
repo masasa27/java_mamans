@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 public class CalculatorController  {
     // initial values
-    Float data = 0f;
+    Float firstValue = 0f;
     int operation = -1;
 
     @FXML
@@ -67,6 +67,7 @@ public class CalculatorController  {
 
     @FXML
     void handleButtonAction(ActionEvent event) {
+        // numbers choise
         if (event.getSource() == one) {
             display.setText(display.getText() + "1");
         } else if (event.getSource() == two) {
@@ -89,41 +90,45 @@ public class CalculatorController  {
             display.setText(display.getText() + "0");
         } else if (event.getSource() == clear) {
             display.setText("");
+
+        // operation
         } else if (event.getSource() == plus) {
-            data = Float.parseFloat(display.getText());
+            firstValue = Float.parseFloat(display.getText());
             operation = 1; // Addition
             display.setText("");
         } else if (event.getSource() == minus) {
-            data = Float.parseFloat(display.getText());
+            firstValue = Float.parseFloat(display.getText());
             operation = 2; // Substraction
             display.setText("");
         } else if (event.getSource() == mult) {
-            data = Float.parseFloat(display.getText());
+            firstValue = Float.parseFloat(display.getText());
             operation = 3; // Mul
             display.setText("");
         } else if (event.getSource() == div) {
-            data = Float.parseFloat(display.getText());
+            firstValue = Float.parseFloat(display.getText());
             operation = 4; // Division
             display.setText("");
         } else if (event.getSource() == equals) {
-            Float secondOperand = Float.parseFloat(display.getText());
+            // perform operation
+
+            Float secondValue = Float.parseFloat(display.getText());
             switch (operation) {
                 case 1: // Addition
-                    Float ans = data + secondOperand;
+                    Float ans = firstValue + secondValue;
                     display.setText(String.valueOf(ans));
                     break;
                 case 2: // Subtraction
-                    ans = data - secondOperand;
+                    ans = firstValue - secondValue;
                     display.setText(String.valueOf(ans));
                     break;
                 case 3: // Mul
-                    ans = data * secondOperand;
+                    ans = firstValue * secondValue;
                     display.setText(String.valueOf(ans));
                     break;
                 case 4: // Div
                     ans = 0f;
                     try {
-                        ans = data / secondOperand;
+                        ans = firstValue / secondValue;
                     } catch (Exception e) {
                         display.setText("Division by zero");
                     }
