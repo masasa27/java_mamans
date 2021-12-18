@@ -10,7 +10,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.List;
-import java.util.*;
 
 public class MultipleChoiceGame extends Application {
 
@@ -116,7 +115,7 @@ public class MultipleChoiceGame extends Application {
                     button.setDisable(true);
                 }
             });
-        // finished all!
+            // finished all!
         } else {
             labelResponse.setText("Youve made it!");
             primaryStage.close();
@@ -124,10 +123,8 @@ public class MultipleChoiceGame extends Application {
 
     }
 
-
-
     public boolean checkCorrectAnswer(String answer, Answer[] ar) {
-    // checking if answer is corrected 
+        // checking if answer is corrected
         for (int i = 0; i < ar.length; i++) {
             if ((ar[i].answer == answer) && (ar[i].correct))
                 return true;
