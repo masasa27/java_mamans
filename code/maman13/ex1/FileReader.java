@@ -12,9 +12,8 @@ public class FileReader {
     public String absFilePath;
 
     public FileReader(String filename) throws IOException {
-        // getting file path
-        String path = new File("./code/maman13/ex1").getAbsolutePath();
-        File absPathFile = new File(path, filename);
+        // getting file path        
+        File absPathFile = new File(filename);
         this.absFilePath = absPathFile.getPath();
     }
 

@@ -17,7 +17,7 @@ public class MultipleChoiceGame extends Application {
     public void start(Stage primaryStage) throws IOException {
         int rowIndex = 0;
 
-        FileReader reader = new FileReader("questions.txt");
+        FileReader reader = new FileReader("code/maman13/ex1/questions.txt");
         List<Question> questions = reader.getQuestions();
 
         Question q = questions.get(rowIndex);
