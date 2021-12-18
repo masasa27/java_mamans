@@ -40,8 +40,6 @@ public class FileReader {
                     this.questions.get(this.questions.size() - 1).addAnswer(answer);
                 }
 
-                System.out.println(rowIndex);
-                System.out.println(data);
                 rowIndex++;
             }
             myReader.close();

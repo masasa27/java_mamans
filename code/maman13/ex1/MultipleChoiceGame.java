@@ -2,7 +2,6 @@ package code.maman13.ex1;
 
 import java.io.IOException;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -62,12 +61,12 @@ public class MultipleChoiceGame extends Application {
 
             Question q = questions.get(rowIndex);
             // randomize order
-            this.shuffleArray(q.answer);
+            Answer[] answers = q.getAnswers();
 
-            radio1.setText(q.answer[0].answer);
-            radio2.setText(q.answer[1].answer);
-            radio3.setText(q.answer[2].answer);
-            radio4.setText(q.answer[3].answer);
+            radio1.setText(answers[0].answer);
+            radio2.setText(answers[1].answer);
+            radio3.setText(answers[2].answer);
+            radio4.setText(answers[3].answer);
             labelFirst.setText(q.question);
 
             ToggleGroup question = new ToggleGroup();
@@ -125,17 +124,7 @@ public class MultipleChoiceGame extends Application {
 
     }
 
-    public void shuffleArray(Answer[] ar) {
-        Random random = new Random();
-        // shuffling a giving array
 
-        for (int i = ar.length - 1; i > 0; i--) {
-            int index = random.nextInt(i + 1);
-            Answer a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
-        }
-    }
 
     public boolean checkCorrectAnswer(String answer, Answer[] ar) {
     // checking if answer is corrected 
