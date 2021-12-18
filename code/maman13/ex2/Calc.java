@@ -50,7 +50,7 @@ public class Calc extends Application {
     private VBox createLayout(TextField screen, TilePane buttons) {
         final VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
-        layout.setStyle("-fx-background-color: chocolate; -fx-padding: 20; -fx-font-size: 20;");
+        layout.setStyle("-fx-background-color: copper; -fx-padding: 20; -fx-font-size: 20;");
         layout.getChildren().setAll(screen, buttons);
         handleAccelerators(layout);
         screen.prefWidthProperty().bind(buttons.widthProperty());
@@ -68,7 +68,7 @@ public class Calc extends Application {
 
     private TextField createScreen() {
         final TextField screen = new TextField();
-        screen.setStyle("-fx-background-color: aquamarine;");
+        screen.setStyle("-fx-background-color: teal;");
         screen.setAlignment(Pos.CENTER_RIGHT);
         screen.setEditable(false);
         screen.textProperty().bind(Bindings.format("%.0f", value));
