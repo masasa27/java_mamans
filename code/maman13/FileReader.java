@@ -36,7 +36,9 @@ public class FileReader {
                     Answer answer = new Answer(data, false);
                 }
 
+                System.out.println(rowIndex);
                 System.out.println(data);
+                rowIndex++;
             }
             myReader.close();
         } catch (FileNotFoundException e) {
