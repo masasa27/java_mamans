@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="387.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.maman13.ex2.CalculatorController">
+<AnchorPane id="AnchorPane" prefHeight="387.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.maman13.ex2.CalculatorController">
     <children>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <GridPane layoutY="92.0" prefHeight="297.0" prefWidth="419.0">
@@ -91,12 +91,12 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="equals" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="500.0" prefWidth="500.0" text="=" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button fx:id="clear" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="500.0" prefWidth="500.0" text="clear" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="clear" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="500.0" prefWidth="500.0" text="CL" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button fx:id="equals" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="500.0" prefWidth="500.0" text="=" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font size="30.0" />
                </font>

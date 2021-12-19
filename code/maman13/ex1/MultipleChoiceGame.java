@@ -12,10 +12,11 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class MultipleChoiceGame extends Application {
+    private int correct = 0;
+    private int rowIndex = 0;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        int rowIndex = 0;
 
         FileReader reader = new FileReader("code/maman13/ex1/questions.txt");
         List<Question> questions = reader.getQuestions();
@@ -25,6 +26,8 @@ public class MultipleChoiceGame extends Application {
         Label labelResponse = new Label();
 
         Button button = new Button("Submit");
+        Button nextQuestion = new Button("Next Question");
+        Button restartGame = new Button("Restart Game");
         RadioButton radio1, radio2, radio3, radio4;
         radio1 = new RadioButton();
         radio2 = new RadioButton();
@@ -33,21 +36,29 @@ public class MultipleChoiceGame extends Application {
 
         VBox layout = new VBox(5);
 
-        layout.getChildren().addAll(labelFirst, radio1, radio2, radio3, radio4, button, labelResponse);
+        layout.getChildren().addAll(labelFirst, radio1, radio2, radio3, radio4, button, nextQuestion, labelResponse,
+                restartGame);
 
         Scene scene1 = new Scene(layout, 400, 250);
         primaryStage.setScene(scene1);
 
         primaryStage.show();
 
+        restartGame.setOnAction(e -> {
+            rowIndex = 0;
+            correct = 0;
+            this.runQuestions(questions, rowIndex, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse,
+                    primaryStage, nextQuestion);
+        });
+
         this.runQuestions(questions, rowIndex, radio1, radio2, radio3, radio4, labelFirst, button, labelResponse,
-                primaryStage);
+                primaryStage, nextQuestion);
 
     }
 
     public void runQuestions(List<Question> questions, int rowIndex, RadioButton radio1, RadioButton radio2,
             RadioButton radio3, RadioButton radio4, Label labelFirst, Button button, Label labelResponse,
-            Stage primaryStage) {
+            Stage primaryStage, Button nextQuestion) {
         /// this functions displays a question, and if user choose answer correctly,
         /// displays the next question
 
@@ -80,34 +91,34 @@ public class MultipleChoiceGame extends Application {
             radio3.setOnAction(e -> button.setDisable(false));
             radio4.setOnAction(e -> button.setDisable(false));
 
+            nextQuestion.setOnAction(e -> {
+                this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
+                        labelResponse, primaryStage, nextQuestion);
+            });
             // answer test
             button.setOnAction(e -> {
                 if ((radio1.isSelected()) && (this.checkCorrectAnswer(radio1.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
-                    button.setDisable(false);
-                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
-                            labelResponse, primaryStage);
+                    button.setDisable(true);
+                    correct += 1;
                 }
 
                 else if ((radio2.isSelected()) && (this.checkCorrectAnswer(radio2.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
-                    button.setDisable(false);
-                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
-                            labelResponse, primaryStage);
+                    button.setDisable(true);
+                    correct += 1;
                 }
 
                 else if ((radio3.isSelected()) && (this.checkCorrectAnswer(radio3.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
-                    button.setDisable(false);
-                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
-                            labelResponse, primaryStage);
+                    button.setDisable(true);
+                    correct += 1;
                 }
 
                 else if ((radio4.isSelected()) && (this.checkCorrectAnswer(radio4.getText(), q.answer))) {
                     labelResponse.setText("Correct answer");
-                    button.setDisable(false);
-                    this.runQuestions(questions, rowIndex + 1, radio1, radio2, radio3, radio4, labelFirst, button,
-                            labelResponse, primaryStage);
+                    button.setDisable(true);
+                    correct += 1;
                 }
 
                 else {
@@ -117,11 +128,12 @@ public class MultipleChoiceGame extends Application {
             });
             // finished all!
         } else {
-            labelResponse.setText("Youve made it!");
-            primaryStage.close();
+            button.setDisable(true);
+            labelResponse.setText("Youve made it!, you scored " + (((float)(correct) / (rowIndex))) * 100 + "%");
         }
 
     }
+
 
     public boolean checkCorrectAnswer(String answer, Answer[] ar) {
         // checking if answer is corrected
